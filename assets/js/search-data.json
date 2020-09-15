@@ -1,6 +1,17 @@
 {
   
     
+        "post0": {
+            "title": "Snake Classifier",
+            "content": "Objective . Create a neural network model that&#39;s capable of deciding between two snake categories. . Using chapter 2 from The fastai book as a guide. Follow the chapter for more detailed explanations. . from fastbook import * from fastai.vision.widgets import * . key = &#39;XXX&#39; # bing image search key snake_types = &#39;kingsnake&#39;, &#39;coral snake&#39; path = Path(&#39;snakes&#39;) . Download 150 images of each snake category to corresponding folders. . if not path.exists(): path.mkdir() for snake_type in snake_types: dest = (path/snake_type) dest.mkdir(exist_ok=True) results = search_images_bing(key, f&#39;{snake_type}&#39;) download_images(dest, urls=results.attrgot(&#39;content_url&#39;)) . Download of http://thenaturaltraveller.files.wordpress.com/2014/01/img_9112.jpg has failed after 5 retries Fix the download manually: $ mkdir -p snakes/coral snake $ cd snakes/coral snake $ wget -c http://thenaturaltraveller.files.wordpress.com/2014/01/img_9112.jpg $ tar xf img_9112.jpg And re-run your code once the download is successful . fns = get_image_files(path) . Remove images that can&#39;t be opened. . failed = verify_images(fns) failed.map(Path.unlink); . Create a DataBlock. Split the images to train (80%) and validation set (20%). Create synthetic images by augmenting the original data using aug_transforms. . snakes = DataBlock( blocks = (ImageBlock, CategoryBlock), get_items=get_image_files, splitter = RandomSplitter(valid_pct=0.2, seed=42), get_y=parent_label, item_tfms=RandomResizedCrop(224, min_scale=0.5), batch_tfms=aug_transforms(mult=2) ) . dls = snakes.dataloaders(path) . dls.train.show_batch(max_n=8, nrows=2, unique=False) . Train the model. . Using pre-trained model resnet18 as a starting point, then fine-tuning it to the snakes problem. . learn = cnn_learner(dls, resnet18, metrics=error_rate) learn.fine_tune(4) . epoch train_loss valid_loss error_rate time . 0 | 1.324692 | 0.415803 | 0.172414 | 00:05 | . epoch train_loss valid_loss error_rate time . 0 | 0.603712 | 0.305789 | 0.068965 | 00:05 | . 1 | 0.562530 | 0.206492 | 0.103448 | 00:05 | . 2 | 0.509871 | 0.188923 | 0.051724 | 00:06 | . 3 | 0.483981 | 0.185373 | 0.068965 | 00:05 | . The error rate stabilizes at around 6%. . interp = ClassificationInterpretation.from_learner(learn) interp.plot_confusion_matrix() . Export the model. . learn.export() . path = Path() path.ls(file_exts=&#39;.pkl&#39;) . (#1) [Path(&#39;export.pkl&#39;)] . You can find out how the model performes on your images on this. The code to setup the web interface is hosted here. . Conclusion . With no more than 150 pictures of a snake of one kind, using pre-trained model with data augmentation of the original pictures, and not doing any tweaking of the parameters, the model achieves accuracy higher than 90%. . I&#39;d like to emphasize the fact that the way we managed this is by showing the model bunch of labeled images. That&#39;s it. We didn&#39;t code any significant features of the snake kinds, like colors or size of the eyes. Fascinating, isn&#39;t it? .",
+            "url": "https://jac08h.github.io/blog/programming/fastai/2020/09/15/snake-classifier.html",
+            "relUrl": "/programming/fastai/2020/09/15/snake-classifier.html",
+            "date": " • Sep 15, 2020"
+        }
+        
+    
+  
+    
   
 
   
@@ -28,7 +39,7 @@
   
 
   
-      "page9": {
+      ,"page9": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://jac08h.github.io/blog/robots.txt",
