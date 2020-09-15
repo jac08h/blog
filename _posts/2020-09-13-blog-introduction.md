@@ -7,7 +7,6 @@ comments: true
 hide: false
 search_exclude: true
 categories: [meta]
-sticky_rank: 1
 ---
 
 # Introduction
